@@ -10,6 +10,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'ckeditor'
+gem 'will_paginate', '~> 3.1.0'
 group :development, :test do
   gem 'byebug'
 end
