@@ -3,3 +3,9 @@
   Name: #{@user.name if @user.name}
 %p
   Email: #{@user.email if @user.email}
+.span8
+  - if @user.posts.any?
+    %h3
+      Posts (#{@user.posts.count})
+    %ol.posts= render @posts
+    = will_paginate @posts

@@ -1,0 +1,13 @@
+- if signed_in?
+  .row
+    %aside.span4S
+      %section= render 'shared/post_form'
+  .span8
+  %h3 Post Feed
+  = render 'shared/feed'
+= image_tag(@idea.picture_url, :width=>600) if @idea.picture.present?
+= cktext_area_tag(«test_area», «Ckeditor is the best»)
+= cktext_area_tag(«content», «Ckeditor», :input_html => {:cols => 10, :rows => 20}, :toolbar => ‘Easy’)
+- else
+  .center.hero-unit
+    %h1 Bless

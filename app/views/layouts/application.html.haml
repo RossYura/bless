@@ -1,0 +1,37 @@
+!!!
+%html
+  %head
+    %title It
+    = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
+    = javascript_include_tag "application", "data-turbolinks-track" => true
+    = csrf_meta_tags
+    %link{:crossorigin => "anonymous", :href => "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css", :integrity => "sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7", :rel => "stylesheet"}/
+    %script{:crossorigin => "anonymous", :integrity => "sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS", :src => "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"}
+  %body
+    %nav.navbar.navbar-default.navbar-static-top{:role => "navigation"}
+      .container
+        - if notice
+          %p.alert.alert-success= notice
+        - if alert
+          %p.alert.alert-danger= alert
+        .navbar-header
+          %button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", :type => "button"}
+            %span.sr-only Toggle navigation
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          %a.navbar-brand{:href => "/"} Home
+        %p.navbar-text.pull-right
+          - if user_signed_in?
+            Logged in as
+            = succeed "." do
+              %strong= current_user.email
+            = link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link'
+            |
+            \#{link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'}
+          - else
+            = link_to "Sign up", new_user_registration_path, :class => 'navbar-link'
+            |
+            \#{link_to "Login", new_user_session_path, :class => 'navbar-link'}
+    .container
+      = yield
